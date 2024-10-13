@@ -110,6 +110,12 @@ protoc --php_out=proto/php/ --proto_path=proto/prototypes/ $(find proto/prototyp
 ```batch
 for /f "usebackq tokens=*" %a in (`dir /S /B "proto/prototypes"`) do protoc --php_out=proto/php/ --proto_path=proto/prototypes/ %a
 ```
+or
+```bash
+find proto/prototypes -type f -print0 | while IFS= read -r -d '' file; do
+  protoc --php_out=proto/php/ --proto_path=proto/prototypes/ "$file"
+done
+```
 
 6. Verify that your API instance is reachable by trying to access:
 
